@@ -1,5 +1,11 @@
+import BucketMenu from "./components/BucketMenu";
+
 function App() {
-    return <div className="App">App</div>;
+    return (
+        <>
+            <BucketMenu />
+        </>
+    );
 }
 
 export default App;
