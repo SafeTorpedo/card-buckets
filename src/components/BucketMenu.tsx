@@ -5,19 +5,32 @@ import { Dialog } from "@mui/material";
 import DialogTitle from "@mui/material/DialogTitle";
 import Tab from "@mui/material/Tab";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { rename } from "../store";
 
 const BucketMenu = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("0");
-    const [tabs, setTabs] = useState([
-        { label: "Entertainment", value: "0" },
-        { label: "Education", value: "1" },
-        { label: "Work", value: "2" },
-        { label: "Other", value: "3" },
-    ]);
 
     const handleChange = (e: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
+    };
+
+    //get tabs state from store
+    const tabss = useSelector((state: RootState) => state.tabs);
+    var [tab0, tab1, tab2, tab3] = tabss;
+
+    const dispatch = useDispatch();
+    const handleSave = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // rename global state tabs with new values
+        const newArray = [tab0, tab1, tab2, tab3];
+        const action = rename(newArray);
+
+        dispatch(action);
+
+        setOpen(false);
     };
 
     return (
@@ -31,10 +44,10 @@ const BucketMenu = () => {
                             textColor="primary"
                             indicatorColor="primary"
                         >
-                            <Tab label={tabs[0].label} value={tabs[0].value} />
-                            <Tab label={tabs[1].label} value={tabs[1].value} />
-                            <Tab label={tabs[2].label} value={tabs[2].value} />
-                            <Tab label={tabs[3].label} value={tabs[3].value} />
+                            <Tab label={tabss[0]} value="0" />
+                            <Tab label={tabss[1]} value="1" />
+                            <Tab label={tabss[2]} value="2" />
+                            <Tab label={tabss[3]} value="3" />
                         </TabList>
                         <TabPanel className="-ml-20" value="0">
                             0
@@ -66,61 +79,53 @@ const BucketMenu = () => {
                 }}
             >
                 <DialogTitle>Rename bucket</DialogTitle>
-                <div className="p-5 ">
-                    <input
-                        type="text"
-                        value={tabs[0].label}
-                        onChange={(e) => {
-                            const newTabs = [...tabs];
-                            newTabs[0].label = e.target.value;
-                            setTabs(newTabs);
-                        }}
-                        className="border border-black rounded-2xl p-2"
-                    />
-                    <br />
-                    <input
-                        type="text"
-                        value={tabs[1].label}
-                        onChange={(e) => {
-                            const newTabs = [...tabs];
-                            newTabs[1].label = e.target.value;
-                            setTabs(newTabs);
-                        }}
-                        className="border border-black rounded-2xl p-2 mt-2"
-                    />
-                    <br />
-                    <input
-                        required
-                        type="text"
-                        value={tabs[2].label}
-                        onChange={(e) => {
-                            const newTabs = [...tabs];
-                            newTabs[2].label = e.target.value;
-                            setTabs(newTabs);
-                        }}
-                        className="border border-black rounded-2xl p-2 mt-2"
-                    />
-                    <br />
-                    <input
-                        type="text"
-                        value={tabs[3].label}
-                        onChange={(e) => {
-                            const newTabs = [...tabs];
-                            newTabs[3].label = e.target.value;
-                            setTabs(newTabs);
-                        }}
-                        className="border border-black rounded-2xl p-2 mt-2"
-                    />
-                    <br />
-                    <button
-                        onClick={() => {
-                            setOpen(false);
-                        }}
-                        className="border border-black rounded-2xl p-2 mt-2 ml-16 bg-blue-700 text-white"
-                    >
-                        Save
-                    </button>
-                </div>
+                <form onSubmit={handleSave}>
+                    <div className="p-5 ">
+                        <input
+                            type="text"
+                            defaultValue={tab0}
+                            onChange={(e) => {
+                                tab0 = e.target.value;
+                            }}
+                            className="border border-black rounded-2xl p-2"
+                        />
+                        <br />
+                        <input
+                            type="text"
+                            defaultValue={tab1}
+                            onChange={(e) => {
+                                tab1 = e.target.value;
+                            }}
+                            className="border border-black rounded-2xl p-2 mt-2"
+                        />
+                        <br />
+                        <input
+                            required
+                            type="text"
+                            defaultValue={tab2}
+                            onChange={(e) => {
+                                tab2 = e.target.value;
+                            }}
+                            className="border border-black rounded-2xl p-2 mt-2"
+                        />
+                        <br />
+                        <input
+                            type="text"
+                            defaultValue={tab3}
+                            onChange={(e) => {
+                                tab3 = e.target.value;
+                            }}
+                            className="border border-black rounded-2xl p-2 mt-2"
+                        />
+                        <br />
+                        <button
+                            type="submit"
+                            className="border border-black rounded-2xl p-2 mt-2 ml-16 bg-blue-700 text-white"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </form>
             </Dialog>
         </div>
     );
