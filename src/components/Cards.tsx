@@ -1,14 +1,46 @@
-import { CardContent, Dialog, DialogTitle, Typography } from "@mui/material";
+import {
+    Button,
+    CardContent,
+    Dialog,
+    DialogActions,
+    DialogTitle,
+    Typography,
+} from "@mui/material";
+
 import Card from "@mui/material/Card";
 import { useState } from "react";
 import ReactPlayer from "react-player";
+import { AiFillDelete } from "react-icons/ai";
 
-const Cards = ({ name, link }) => {
+import { remove0, remove1, remove2, remove3 } from "../store";
+import { useDispatch } from "react-redux";
+
+const Cards = ({ name, link, value }) => {
     const [open, setOpen] = useState(false);
+    const [show, setShow] = useState(false);
+    const dispatch = useDispatch();
+    const handleDelete = () => {
+        //delete card from global state
+
+        if (value === 0) {
+            const action = remove0(name);
+            dispatch(action);
+        } else if (value === 1) {
+            const action = remove1(name);
+            dispatch(action);
+        } else if (value === 2) {
+            const action = remove2(name);
+            dispatch(action);
+        } else if (value === 3) {
+            const action = remove3(name);
+            dispatch(action);
+        }
+
+        setShow(false);
+    };
     return (
         <>
             <Card
-                onClick={() => setOpen(true)}
                 variant="outlined"
                 sx={{
                     width: 300,
@@ -24,10 +56,20 @@ const Cards = ({ name, link }) => {
                 }}
             >
                 <CardContent>
+                    <AiFillDelete
+                        size={20}
+                        color="red"
+                        className=" -mt-20 "
+                        onClick={() => setShow(true)}
+                    />
                     <Typography
+                        onClick={() => setOpen(true)}
                         sx={{
                             fontSize: "50px",
                             margin: "auto",
+                            ":hover": {
+                                cursor: "pointer",
+                            },
                         }}
                         color="text.secondary gutterBottom"
                     >
@@ -53,6 +95,17 @@ const Cards = ({ name, link }) => {
                         margin: "auto",
                     }}
                 />
+            </Dialog>
+            <Dialog open={show} onClose={() => setShow(false)}>
+                <DialogTitle>Do you want to delete?</DialogTitle>
+                <DialogActions>
+                    <Button onClick={() => setShow(false)} autoFocus>
+                        Cancel
+                    </Button>
+                    <Button variant="contained" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                </DialogActions>
             </Dialog>
         </>
     );

@@ -67,6 +67,7 @@ const Add = () => {
             <div className="flex flex-col mt-4">
                 <label htmlFor="name">Name</label>
                 <input
+                    required
                     className="rounded-lg border border-gray-500 p-2"
                     type="text"
                     id="name"
@@ -75,6 +76,7 @@ const Add = () => {
             <div className="flex flex-col mt-4">
                 <label htmlFor="link">Link</label>
                 <input
+                    required
                     className="rounded-lg border border-gray-500 p-2"
                     type="text"
                     id="link"

@@ -8,7 +8,14 @@ const CardList = ({ value }) => {
     return (
         <div className="grid grid-cols-2">
             {cards.map((card, index) => {
-                return <Cards key={index} name={card.name} link={card.link} />;
+                return (
+                    <Cards
+                        key={index}
+                        name={card.name}
+                        link={card.link}
+                        value={value}
+                    />
+                );
             })}
         </div>
     );

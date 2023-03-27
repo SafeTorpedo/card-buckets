@@ -19,7 +19,10 @@ const slice0 = createSlice({
             state.push(action.payload);
         },
         remove0: (state, action) => {
-            state.splice(action.payload, 1);
+            const index = state.findIndex(
+                (item) => item.name === action.payload
+            );
+            state.splice(index, 1);
         },
     },
 });
@@ -32,7 +35,10 @@ const slice1 = createSlice({
             state.push(action.payload);
         },
         remove1: (state, action) => {
-            state.splice(action.payload, 1);
+            const index = state.findIndex(
+                (item) => item.name === action.payload
+            );
+            state.splice(index, 1);
         },
     },
 });
@@ -45,7 +51,10 @@ const slice2 = createSlice({
             state.push(action.payload);
         },
         remove2: (state, action) => {
-            state.splice(action.payload, 1);
+            const index = state.findIndex(
+                (item) => item.name === action.payload
+            );
+            state.splice(index, 1);
         },
     },
 });
@@ -58,7 +67,10 @@ const slice3 = createSlice({
             state.push(action.payload);
         },
         remove3: (state, action) => {
-            state.splice(action.payload, 1);
+            const index = state.findIndex(
+                (item) => item.name === action.payload
+            );
+            state.splice(index, 1);
         },
     },
 });
