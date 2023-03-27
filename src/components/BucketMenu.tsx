@@ -7,10 +7,13 @@ import Tab from "@mui/material/Tab";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { rename } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const BucketMenu = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("0");
+
+    const navigate = useNavigate();
 
     const handleChange = (e: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -69,6 +72,12 @@ const BucketMenu = () => {
                         className=" border border-black p-2 rounded-2xl bg-blue-700 text-white"
                     >
                         Rename bucket
+                    </button>
+                    <button
+                        className=" border border-black p-2 rounded-2xl bg-blue-700 text-white ml-3"
+                        onClick={() => navigate("/add")}
+                    >
+                        Add New
                     </button>
                 </div>
             </div>

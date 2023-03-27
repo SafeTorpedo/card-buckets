@@ -15,10 +15,10 @@ const slice0 = createSlice({
     name: "0",
     initialState: [],
     reducers: {
-        add: (state, action) => {
+        add0: (state, action) => {
             state.push(action.payload);
         },
-        remove: (state, action) => {
+        remove0: (state, action) => {
             state.splice(action.payload, 1);
         },
     },
@@ -28,10 +28,10 @@ const slice1 = createSlice({
     name: "1",
     initialState: [],
     reducers: {
-        add: (state, action) => {
+        add1: (state, action) => {
             state.push(action.payload);
         },
-        remove: (state, action) => {
+        remove1: (state, action) => {
             state.splice(action.payload, 1);
         },
     },
@@ -41,10 +41,10 @@ const slice2 = createSlice({
     name: "2",
     initialState: [],
     reducers: {
-        add: (state, action) => {
+        add2: (state, action) => {
             state.push(action.payload);
         },
-        remove: (state, action) => {
+        remove2: (state, action) => {
             state.splice(action.payload, 1);
         },
     },
@@ -54,10 +54,10 @@ const slice3 = createSlice({
     name: "3",
     initialState: [],
     reducers: {
-        add: (state, action) => {
+        add3: (state, action) => {
             state.push(action.payload);
         },
-        remove: (state, action) => {
+        remove3: (state, action) => {
             state.splice(action.payload, 1);
         },
     },
@@ -75,3 +75,7 @@ const store = configureStore({
 
 export { store };
 export const { rename } = tabs.actions;
+export const { add0, remove0 } = slice0.actions;
+export const { add1, remove1 } = slice1.actions;
+export const { add2, remove2 } = slice2.actions;
+export const { add3, remove3 } = slice3.actions;
