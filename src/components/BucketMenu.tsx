@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { rename } from "../store";
 import { useNavigate } from "react-router-dom";
+import Cards from "./Cards";
+import CardList from "./CardList";
 
 const BucketMenu = () => {
     const [open, setOpen] = useState(false);
@@ -53,16 +55,16 @@ const BucketMenu = () => {
                             <Tab label={tabss[3]} value="3" />
                         </TabList>
                         <TabPanel className="-ml-20" value="0">
-                            0
+                            <CardList value={0} />
                         </TabPanel>
                         <TabPanel className="-ml-20" value="1">
-                            1
+                            <CardList value={1} />
                         </TabPanel>
                         <TabPanel className="-ml-20" value="2">
-                            2
+                            <CardList value={2} />
                         </TabPanel>
                         <TabPanel className="-ml-20" value="3">
-                            3
+                            <CardList value={3} />
                         </TabPanel>
                     </TabContext>
                 </div>
